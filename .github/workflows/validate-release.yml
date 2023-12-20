@@ -293,7 +293,7 @@ jobs:
           pushd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
           bin/init-store.sh || exit
           sleep 3
-          bin/start-hugegraph.sh || exit
+          bin/start-hugegraph.sh || (cat /home/runner/work/incubator-hugegraph-doc/incubator-hugegraph-doc/dist/1.2.0/apache-hugegraph-incubating-1.2.0/logs/hugegraph-server.log && exit 1)
           popd || exit
 
       - name: 9. Run Binary Packages In ToolChain (Loader & Tool & Hubble)
