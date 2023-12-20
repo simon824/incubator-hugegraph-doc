@@ -2,10 +2,10 @@
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>配置文件的目录为 hugegraph-release/conf，所有关于服务和图本身的配置都在此目录下。&lt;/p>
 &lt;p>主要的配置文件包括：gremlin-server.yaml、rest-server.properties 和 hugegraph.properties&lt;/p>
-&lt;p>HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-server.yaml 和 rest-server.properties 就是用来配置这两个Server的。&lt;/p>
+&lt;p>HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-server.yaml 和 rest-server.properties 就是用来配置这两个 Server 的。&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server">GremlinServer&lt;/a>：GremlinServer接受用户的gremlin语句，解析后转而调用Core的代码。&lt;/li>
-&lt;li>RestServer：提供RESTful API，根据不同的HTTP请求，调用对应的Core API，如果用户请求体是gremlin语句，则会转发给GremlinServer，实现对图数据的操作。&lt;/li>
+&lt;li>&lt;a href="http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server">GremlinServer&lt;/a>：GremlinServer 接受用户的 gremlin 语句，解析后转而调用 Core 的代码。&lt;/li>
+&lt;li>RestServer：提供 RESTful API，根据不同的 HTTP 请求，调用对应的 Core API，如果用户请求体是 gremlin 语句，则会转发给 GremlinServer，实现对图数据的操作。&lt;/li>
 &lt;/ul>
 &lt;p>下面对这三个配置文件逐一介绍。&lt;/p>
 &lt;h3 id="2-gremlin-serveryaml">2 gremlin-server.yaml&lt;/h3>
@@ -14,38 +14,61 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">#host: 127.0.0.1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">#port: 8182&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># timeout in ms of gremlin query&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">scriptEvaluationTimeout&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30000&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Gremlin 查询中的超时时间（以毫秒为单位）&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">evaluationTimeout&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30000&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">channelizer&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizer&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># 不要在此处设置图形，此功能将在支持动态添加图形后再进行处理&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">graphs&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/hugegraph.properties&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">scriptEngines&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">gremlin-groovy&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">staticImports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.opencypher.gremlin.process.traversal.CustomPredicates.*&amp;#39;,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.opencypher.gremlin.traversal.CustomFunctions.*&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">plugins&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">com.baidu.hugegraph.plugin.HugeGraphGremlinPlugin&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{}&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">org.apache.hugegraph.plugin.HugeGraphGremlinPlugin&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{}&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">org.apache.tinkerpop.gremlin.server.jsr223.GremlinServerGremlinPlugin&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{}&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">org.apache.tinkerpop.gremlin.jsr223.ImportGremlinPlugin&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">classImports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">java.lang.Math,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.backend.id.IdGenerator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.type.define.Directions,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.type.define.NodeRole,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.CustomizePathsTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.CustomizedCrosspointsTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.FusiformSimilarityTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.HugeTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.NeighborRankTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.PathsTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.PersonalRankTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.ShortestPathTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.algorithm.SubGraphTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.optimize.Text,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.traversal.optimize.TraversalUtil,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.util.DateUtil&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.backend.id.IdGenerator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.type.define.Directions,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.type.define.NodeRole,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.CollectionPathsTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.CountTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.CustomizedCrosspointsTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.CustomizePathsTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.FusiformSimilarityTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.HugeTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.JaccardSimilarTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.KneighborTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.KoutTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.MultiNodeShortestPathTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.NeighborRankTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.PathsTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.PersonalRankTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.SameNeighborTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.ShortestPathTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.SingleSourceShortestPathTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.SubGraphTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.TemplatePathsTraverser,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.steps.EdgeStep,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.steps.RepeatEdgeStep,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.algorithm.steps.WeightedEdgeStep,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.optimize.ConditionP,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.optimize.Text,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.traversal.optimize.TraversalUtil,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.util.DateUtil,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.opencypher.gremlin.traversal.CustomFunctions,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.opencypher.gremlin.traversal.CustomPredicate&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">methodImports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">java.lang.Math#*]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">methodImports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">java.lang.Math#*,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.opencypher.gremlin.traversal.CustomPredicate#*,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.opencypher.gremlin.traversal.CustomFunctions#*&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">files&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">scripts/empty-sample.groovy]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -57,25 +80,25 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- {&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">className&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.tinkerpop.gremlin.driver.ser.GraphBinaryMessageSerializerV1,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">serializeResultToString&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ioRegistries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.io.HugeGraphIoRegistry]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ioRegistries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">org.apache.hugegraph.io.HugeGraphIoRegistry]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- {&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">className&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">serializeResultToString&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ioRegistries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.io.HugeGraphIoRegistry]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ioRegistries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">org.apache.hugegraph.io.HugeGraphIoRegistry]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- {&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">className&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV2d0,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">serializeResultToString&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ioRegistries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.io.HugeGraphIoRegistry]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ioRegistries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">org.apache.hugegraph.io.HugeGraphIoRegistry]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- {&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">className&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV3d0,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">serializeResultToString&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ioRegistries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.io.HugeGraphIoRegistry]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ioRegistries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">org.apache.hugegraph.io.HugeGraphIoRegistry]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">metrics&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -104,27 +127,30 @@
 用户可以通过 &lt;a href="/clients/gremlin-console.html">Gremlin-Console&lt;/a> 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，
 推荐使用 HTTP 的通信方式，HugeGraph 的外围组件都是基于 HTTP 实现的；&lt;/li>
 &lt;/ul>
-&lt;p>默认GremlinServer是服务在 localhost:8182，如果需要修改，配置 host、port 即可&lt;/p>
+&lt;p>默认 GremlinServer 是服务在 localhost:8182，如果需要修改，配置 host、port 即可&lt;/p>
 &lt;ul>
-&lt;li>host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且GremlinServer不直接暴露给用户;&lt;/li>
+&lt;li>host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且 GremlinServer 不直接暴露给用户;&lt;/li>
 &lt;li>port：部署 GremlinServer 机器的端口；&lt;/li>
 &lt;/ul>
 &lt;p>同时需要在 rest-server.properties 中增加对应的配置项 gremlinserver.url=http://host:port&lt;/p>
 &lt;h3 id="3-rest-serverproperties">3 rest-server.properties&lt;/h3>
 &lt;p>rest-server.properties 文件的默认内容如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties"># bind url
-restserver.url=http://127.0.0.1:8080
-# gremlin server url, need to be consistent with host and port in gremlin-server.yaml
-#gremlinserver.url=http://127.0.0.1:8182
-# graphs list with pair NAME:CONF_PATH
-graphs=[hugegraph:conf/hugegraph.properties]
-# authentication
-#auth.authenticator=
-#auth.admin_token=
-#auth.user_tokens=[]
-server.id=server-1
-server.role=master
-&lt;/code>&lt;/pre>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># bind url
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8080
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># gremlin server url, need to be consistent with host and port in gremlin-server.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#gremlinserver.url=http://127.0.0.1:8182
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># graphs list with pair NAME:CONF_PATH
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>graphs=[hugegraph:conf/hugegraph.properties]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># authentication
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.authenticator=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.admin_token=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.user_tokens=[]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.id=server-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.role=master
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>restserver.url：RestServer 提供服务的 url，根据实际环境修改；&lt;/li>
 &lt;li>graphs：RestServer 启动时也需要打开图，该项为 map 结构，key 是图的名字，value 是该图的配置文件路径；&lt;/li>
 &lt;/ul>
@@ -136,110 +162,161 @@ server.role=master
 &lt;/blockquote>
 &lt;h3 id="4-hugegraphproperties">4 hugegraph.properties&lt;/h3>
 &lt;p>hugegraph.properties 是一类文件，因为如果系统存在多个图，则会有多个相似的文件。该文件用来配置与图存储和查询相关的参数，文件的默认内容如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties"># gremlin entrence to create graph
-gremlin.graph=com.baidu.hugegraph.HugeFactory
-# cache config
-#schema.cache_capacity=100000
-# vertex-cache default is 1000w, 10min expired
-#vertex.cache_capacity=10000000
-#vertex.cache_expire=600
-# edge-cache default is 100w, 10min expired
-#edge.cache_capacity=1000000
-#edge.cache_expire=600
-# schema illegal name template
-#schema.illegal_name_regex=\s+|~.*
-#vertex.default_label=vertex
-backend=rocksdb
-serializer=binary
-store=hugegraph
-raft.mode=false
-raft.safe_read=false
-raft.use_snapshot=false
-raft.endpoint=127.0.0.1:8281
-raft.group_peers=127.0.0.1:8281,127.0.0.1:8282,127.0.0.1:8283
-raft.path=./raft-log
-raft.use_replicator_pipeline=true
-raft.election_timeout=10000
-raft.snapshot_interval=3600
-raft.backend_threads=48
-raft.read_index_threads=8
-raft.queue_size=16384
-raft.queue_publish_timeout=60
-raft.apply_batch=1
-raft.rpc_threads=80
-raft.rpc_connect_timeout=5000
-raft.rpc_timeout=60000
-search.text_analyzer=jieba
-search.text_analyzer_mode=INDEX
-# rocksdb backend config
-#rocksdb.data_path=/path/to/disk
-#rocksdb.wal_path=/path/to/disk
-# cassandra backend config
-cassandra.host=localhost
-cassandra.port=9042
-cassandra.username=
-cassandra.password=
-#cassandra.connect_timeout=5
-#cassandra.read_timeout=20
-#cassandra.keyspace.strategy=SimpleStrategy
-#cassandra.keyspace.replication=3
-# hbase backend config
-#hbase.hosts=localhost
-#hbase.port=2181
-#hbase.znode_parent=/hbase
-#hbase.threads_max=64
-# mysql backend config
-#jdbc.driver=com.mysql.jdbc.Driver
-#jdbc.url=jdbc:mysql://127.0.0.1:3306
-#jdbc.username=root
-#jdbc.password=
-#jdbc.reconnect_max_times=3
-#jdbc.reconnect_interval=3
-#jdbc.sslmode=false
-# postgresql &amp;amp; cockroachdb backend config
-#jdbc.driver=org.postgresql.Driver
-#jdbc.url=jdbc:postgresql://localhost:5432/
-#jdbc.username=postgres
-#jdbc.password=
-# palo backend config
-#palo.host=127.0.0.1
-#palo.poll_interval=10
-#palo.temp_dir=./palo-data
-#palo.file_limit_size=32
-&lt;/code>&lt;/pre>&lt;p>重点关注未注释的几项：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># gremlin entrence to create graph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.HugeFactory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cache config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#schema.cache_capacity=100000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># vertex-cache default is 1000w, 10min expired
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#vertex.cache_capacity=10000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#vertex.cache_expire=600
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># edge-cache default is 100w, 10min expired
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#edge.cache_capacity=1000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#edge.cache_expire=600
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># schema illegal name template
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#schema.illegal_name_regex=\s+|~.*
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#vertex.default_label=vertex
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.mode=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.safe_read=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.use_snapshot=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.endpoint=127.0.0.1:8281
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.group_peers=127.0.0.1:8281,127.0.0.1:8282,127.0.0.1:8283
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.path=./raft-log
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.use_replicator_pipeline=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.election_timeout=10000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.snapshot_interval=3600
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.backend_threads=48
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.read_index_threads=8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.queue_size=16384
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.queue_publish_timeout=60
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.apply_batch=1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.rpc_threads=80
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.rpc_connect_timeout=5000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>raft.rpc_timeout=60000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># if use &amp;#39;ikanalyzer&amp;#39;, need download jar from &amp;#39;https://github.com/apache/hugegraph-doc/raw/ik_binary/dist/server/ikanalyzer-2012_u6.jar&amp;#39; to lib directory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>search.text_analyzer=jieba
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>search.text_analyzer_mode=INDEX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># rocksdb backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#rocksdb.data_path=/path/to/disk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#rocksdb.wal_path=/path/to/disk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cassandra backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.host=localhost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.port=9042
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.username=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.connect_timeout=5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.read_timeout=20
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># hbase backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.hosts=localhost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.port=2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.znode_parent=/hbase
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.threads_max=64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># mysql backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.driver=com.mysql.jdbc.Driver
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.url=jdbc:mysql://127.0.0.1:3306
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.username=root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.reconnect_max_times=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.reconnect_interval=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.ssl_mode=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># postgresql &amp;amp; cockroachdb backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.driver=org.postgresql.Driver
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.url=jdbc:postgresql://localhost:5432/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.username=postgres
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># palo backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#palo.host=127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#palo.poll_interval=10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#palo.temp_dir=./palo-data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#palo.file_limit_size=32
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>重点关注未注释的几项：&lt;/p>
 &lt;ul>
 &lt;li>gremlin.graph：GremlinServer 的启动入口，用户不要修改此项；&lt;/li>
-&lt;li>backend：使用的后端存储，可选值有 memory、cassandra、scylladb 和 rocksdb；&lt;/li>
-&lt;li>serializer：主要为内部使用，用于将 schema、vertex 和 edge 序列化到后端，对应的可选值为 text、cassandra、scylladb 和 binary；(注：rocksdb后端值需是binary，其他后端backend与serializer值需保持一致，如hbase后端该值为hbase)&lt;/li>
+&lt;li>backend：使用的后端存储，可选值有 memory、cassandra、scylladb、mysql、hbase、postgresql 和 rocksdb；&lt;/li>
+&lt;li>serializer：主要为内部使用，用于将 schema、vertex 和 edge 序列化到后端，对应的可选值为 text、cassandra、scylladb 和 binary；(注：rocksdb 后端值需是 binary，其他后端 backend 与 serializer 值需保持一致，如 hbase 后端该值为 hbase)&lt;/li>
 &lt;li>store：图存储到后端使用的数据库名，在 cassandra 和 scylladb 中就是 keyspace 名，此项的值与 GremlinServer 和 RestServer 中的图名并无关系，但是出于直观考虑，建议仍然使用相同的名字；&lt;/li>
 &lt;li>cassandra.host：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 seeds；&lt;/li>
 &lt;li>cassandra.port：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 native port；&lt;/li>
 &lt;li>rocksdb.data_path：backend 为 rocksdb 时此项才有意义，rocksdb 的数据目录&lt;/li>
 &lt;li>rocksdb.wal_path：backend 为 rocksdb 时此项才有意义，rocksdb 的日志目录&lt;/li>
-&lt;li>admin.token: 通过一个token来获取服务器的配置信息，例如：&lt;a href="http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55">http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55&lt;/a>&lt;/li>
+&lt;li>admin.token: 通过一个 token 来获取服务器的配置信息，例如：&lt;a href="http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55">http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="5-多图配置">5 多图配置&lt;/h3>
-&lt;p>我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 hugegraph 和 hugegraph1，其中 hugegraph 以 cassandra 作为后端，hugegraph1 以 rocksdb作为后端。&lt;/p>
+&lt;p>我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 &lt;code>hugegraph_rocksdb&lt;/code> 和 &lt;code>hugegraph_mysql&lt;/code>，其中 &lt;code>hugegraph_rocksdb&lt;/code> 以 &lt;code>RocksDB&lt;/code> 作为后端，&lt;code>hugegraph_mysql&lt;/code> 以 &lt;code>MySQL&lt;/code> 作为后端。&lt;/p>
 &lt;p>配置方法也很简单：&lt;/p>
-&lt;p>&lt;strong>修改 gremlin-server.yaml&lt;/strong>&lt;/p>
-&lt;p>在 gremlin-server.yaml 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">graphs&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/hugegraph.properties,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph1&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/hugegraph1.properties&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>修改 rest-server.properties&lt;/strong>&lt;/p>
-&lt;p>在 rest-server.properties 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properties]
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>添加 hugegraph1.properties&lt;/strong>&lt;/p>
-&lt;p>拷贝 hugegraph.properties，命名为 hugegraph1.properties，修改图对应的数据库名以及关于后端部分的参数，比如：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">store=hugegraph1
-...
-backend=rocksdb
-serializer=binary
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>停止 Server，初始化执行 init-store.sh（为新的图创建数据库），重新启动 Server&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ bin/stop-hugegraph.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ bin/init-store.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ bin/start-hugegraph.sh
+&lt;p>&lt;strong>[可选]：修改 rest-server.properties&lt;/strong>&lt;/p>
+&lt;p>通过修改 &lt;code>rest-server.properties&lt;/code> 中的 &lt;code>graphs&lt;/code> 配置项来设置图的配置文件目录。默认配置为 &lt;code>graphs=./conf/graphs&lt;/code>，如果想要修改为其它目录则调整 &lt;code>graphs&lt;/code> 配置项，比如调整为 &lt;code>graphs=/etc/hugegraph/graphs&lt;/code>，示例如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graphs=./conf/graphs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 &lt;code>conf/graphs&lt;/code> 路径下基于 &lt;code>hugegraph.properties&lt;/code> 修改得到 &lt;code>hugegraph_mysql_backend.properties&lt;/code> 和 &lt;code>hugegraph_rocksdb_backend.properties&lt;/code>&lt;/p>
+&lt;p>&lt;code>hugegraph_mysql_backend.properties&lt;/code> 修改的部分如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=mysql
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=mysql
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph_mysql
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># mysql backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.driver=com.mysql.cj.jdbc.Driver
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.url=jdbc:mysql://127.0.0.1:3306
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.username=root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.password=123456
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_max_times=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_interval=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.ssl_mode=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>hugegraph_rocksdb_backend.properties&lt;/code> 修改的部分如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=rocksdb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph_rocksdb
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>停止 Server，初始化执行 init-store.sh（为新的图创建数据库），重新启动 Server&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ ./bin/stop-hugegraph.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ ./bin/init-store.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initializing HugeGraph Store...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:14 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.u.ConfigUtil - Scanning option &lt;span style="color:#4e9a06">&amp;#39;graphs&amp;#39;&lt;/span> directory &lt;span style="color:#4e9a06">&amp;#39;./conf/graphs&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:14 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_rocksdb_backend.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:15 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.StandardHugeGraph - Graph &lt;span style="color:#4e9a06">&amp;#39;hugegraph_rocksdb&amp;#39;&lt;/span> has been initialized
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:15 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_mysql_backend.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:16 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.StandardHugeGraph - Graph &lt;span style="color:#4e9a06">&amp;#39;hugegraph_mysql&amp;#39;&lt;/span> has been initialized
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:16 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.StandardHugeGraph - Close graph standardhugegraph&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>hugegraph_rocksdb&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:16 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeFactory - HugeFactory shutdown
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:16 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>hugegraph-shutdown&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeFactory - HugeGraph is shutting down
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initialization finished.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ ./bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>...OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Started &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>pid 21614&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看创建的图：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://127.0.0.1:8080/graphs/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;graphs&amp;#34;&lt;/span>:&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;hugegraph_rocksdb&amp;#34;&lt;/span>,&lt;span style="color:#4e9a06">&amp;#34;hugegraph_mysql&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看某个图的信息：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://127.0.0.1:8080/graphs/hugegraph_mysql_backend
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;hugegraph_mysql&amp;#34;&lt;/span>,&lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;mysql&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://127.0.0.1:8080/graphs/hugegraph_rocksdb_backend
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;hugegraph_rocksdb&amp;#34;&lt;/span>,&lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph 配置项</title><link>/cn/docs/config/config-option/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-option/</guid><description>
 &lt;h3 id="gremlin-server-配置项">Gremlin Server 配置项&lt;/h3>
 &lt;p>对应配置文件&lt;code>gremlin-server.yaml&lt;/code>&lt;/p>
@@ -279,7 +356,7 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>authentication&lt;/td>
-&lt;td>authenticator: com.baidu.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}&lt;/td>
+&lt;td>authenticator: org.apache.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}&lt;/td>
 &lt;td>The authenticator and config(contains tokens path) of authentication mechanism.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
@@ -388,22 +465,22 @@ serializer=binary
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.admin_token&lt;/td>
 &lt;td>162f7848-0b6d-4faf-b557-3a0797869c55&lt;/td>
-&lt;td>Token for administrator operations, only for com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>Token for administrator operations, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.graph_store&lt;/td>
 &lt;td>hugegraph&lt;/td>
-&lt;td>The name of graph used to store authentication information, like users, only for com.baidu.hugegraph.auth.StandardAuthenticator.&lt;/td>
+&lt;td>The name of graph used to store authentication information, like users, only for org.apache.hugegraph.auth.StandardAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.user_tokens&lt;/td>
 &lt;td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]&lt;/td>
-&lt;td>The map of user tokens with name and password, only for com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The map of user tokens with name and password, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.audit_log_rate&lt;/td>
@@ -455,7 +532,7 @@ serializer=binary
 &lt;tbody>
 &lt;tr>
 &lt;td>gremlin.graph&lt;/td>
-&lt;td>com.baidu.hugegraph.HugeFactory&lt;/td>
+&lt;td>org.apache.hugegraph.HugeFactory&lt;/td>
 &lt;td>Gremlin entrance to create graph.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -676,7 +753,7 @@ serializer=binary
 &lt;tr>
 &lt;td>search.text_analyzer&lt;/td>
 &lt;td>ikanalyzer&lt;/td>
-&lt;td>Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer].&lt;/td>
+&lt;td>Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer]. # if use &amp;lsquo;ikanalyzer&amp;rsquo;, need download jar from &amp;lsquo;&lt;a href="https://github.com/apache/hugegraph-doc/raw/ik_binary/dist/server/ikanalyzer-2012_u6.jar'">https://github.com/apache/hugegraph-doc/raw/ik_binary/dist/server/ikanalyzer-2012_u6.jar'&lt;/a> to lib directory&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>search.text_analyzer_mode&lt;/td>
@@ -1417,19 +1494,15 @@ serializer=binary
 &lt;/table>
 &lt;p>其它与 MySQL 后端一致。&lt;/p>
 &lt;blockquote>
-&lt;p>PostgreSQL 后端的 driver 和 url 应该设置为:&lt;/p>
+&lt;p>PostgreSQL 后端的 driver 和 url 应该设置为：&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>jdbc.driver=org.postgresql.Driver&lt;/code>&lt;/li>
 &lt;li>&lt;code>jdbc.url=jdbc:postgresql://localhost:5432/&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph 内置用户权限与扩展权限配置及使用</title><link>/cn/docs/config/config-authentication/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-authentication/</guid><description>
 &lt;h3 id="概述">概述&lt;/h3>
-&lt;p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：&lt;/p>
-&lt;ol>
-&lt;li>简单的&lt;code>ConfigAuthenticator&lt;/code>模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer)&lt;/li>
-&lt;li>完备的&lt;code>StandardAuthenticator&lt;/code>模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)&lt;/li>
-&lt;/ol>
-&lt;p>其中 &lt;code>StandardAuthenticator&lt;/code> 模式的几个核心设计：&lt;/p>
+&lt;p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了完备的&lt;code>StandardAuthenticator&lt;/code>权限模式，支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)&lt;/p>
+&lt;p>&lt;code>StandardAuthenticator&lt;/code> 模式的几个核心设计：&lt;/p>
 &lt;ul>
 &lt;li>初始化时创建超级管理员 (&lt;code>admin&lt;/code>) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户&lt;/li>
 &lt;li>支持动态创建用户、用户组、资源，支持动态分配或取消权限&lt;/li>
@@ -1440,44 +1513,31 @@ serializer=binary
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 场景：某用户只有北京地区的数据读取权限
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">user&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">xx&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#000">belong&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">group&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">xx&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#000">access&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">read&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)-&amp;gt;&lt;/span> &lt;span style="color:#000">target&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph1&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">resource&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">={&lt;/span>&lt;span style="color:#000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">person&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">city&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">Beijing&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">})&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置用户认证">配置用户认证&lt;/h3>
-&lt;p>HugeGraph 默认&lt;strong>不启用&lt;/strong>用户认证功能，需通过修改配置文件来启用该功能。内置实现了&lt;code>StandardAuthenticator&lt;/code>和&lt;code>ConfigAuthenticator&lt;/code>两种模式，&lt;code>StandardAuthenticator&lt;/code>模式支持多用户认证与细粒度权限控制，&lt;code>ConfigAuthenticator&lt;/code>模式支持简单的用户权限认证。此外，开发者可以自定义实现&lt;code>HugeAuthenticator&lt;/code>接口来对接自身的权限系统。&lt;/p>
+&lt;p>HugeGraph 默认&lt;strong>不启用&lt;/strong>用户认证功能，需通过修改配置文件来启用该功能。内置实现了&lt;code>StandardAuthenticator&lt;/code>模式，该模式支持多用户认证与细粒度权限控制。此外，开发者可以自定义实现&lt;code>HugeAuthenticator&lt;/code>接口来对接自身的权限系统。&lt;/p>
 &lt;p>用户认证方式均采用 &lt;a href="https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81">HTTP Basic Authentication&lt;/a> ，简单说就是在发送 HTTP 请求时在 &lt;code>Authentication&lt;/code> 设置选择 &lt;code>Basic&lt;/code> 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">Authorization: Basic admin xxxx
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="standardauthenticator模式">StandardAuthenticator模式&lt;/h4>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="standardauthenticator-模式">StandardAuthenticator 模式&lt;/h4>
 &lt;p>&lt;code>StandardAuthenticator&lt;/code>模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：&lt;/p>
 &lt;p>在配置文件&lt;code>gremlin-server.yaml&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>rest-server&lt;/code>文件路径：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.StandardAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.StandardAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在配置文件&lt;code>rest-server.properties&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>graph_store&lt;/code>信息：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
-auth.graph_store=hugegraph
-# auth client config
-# 如果是分开部署 GraphServer 和 AuthServer, 还需要指定下面的配置, 地址填写 AuthServer 的 IP:RPC 端口
-#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
-&lt;/code>&lt;/pre>&lt;p>其中，&lt;code>graph_store&lt;/code>配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.graph_store=hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># auth client config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 如果是分开部署 GraphServer 和 AuthServer，还需要指定下面的配置，地址填写 AuthServer 的 IP:RPC 端口
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>graph_store&lt;/code>配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。&lt;/p>
 &lt;p>在配置文件&lt;code>hugegraph{n}.properties&lt;/code>中配置&lt;code>gremlin.graph&lt;/code>信息：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
-&lt;/code>&lt;/pre>&lt;p>然后详细的权限 API 调用和说明请参考 &lt;a href="/docs/clients/restful-api/auth">Authentication-API&lt;/a> 文档&lt;/p>
-&lt;h4 id="configauthenticator模式">ConfigAuthenticator模式&lt;/h4>
-&lt;p>&lt;code>ConfigAuthenticator&lt;/code>模式是通过预先在配置文件中设置用户信息来支持用户认证，该实现是基于配置好的静态&lt;code>tokens&lt;/code>来验证用户是否合法。下面是具体的配置流程（重启服务生效）：&lt;/p>
-&lt;p>在配置文件&lt;code>gremlin-server.yaml&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>rest-server&lt;/code>文件路径：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.ConfigAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在配置文件&lt;code>rest-server.properties&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>tokens&lt;/code>信息：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
-auth.admin_token=token-value-a
-auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
-&lt;/code>&lt;/pre>&lt;p>在配置文件&lt;code>hugegraph{n}.properties&lt;/code>中配置&lt;code>gremlin.graph&lt;/code>信息：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
-&lt;/code>&lt;/pre>&lt;h3 id="自定义用户认证系统">自定义用户认证系统&lt;/h3>
-&lt;p>如果需要支持更加灵活的用户系统，可自定义authenticator进行扩展，自定义authenticator实现接口&lt;code>com.baidu.hugegraph.auth.HugeAuthenticator&lt;/code>即可，然后修改配置文件中&lt;code>authenticator&lt;/code>配置项指向该实现。&lt;/p></description></item><item><title>Docs: 配置 HugeGraphServer 使用 https 协议</title><link>/cn/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-https/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后详细的权限 API 调用和说明请参考 &lt;a href="/docs/clients/restful-api/auth">Authentication-API&lt;/a> 文档。&lt;/p>
+&lt;h3 id="自定义用户认证系统">自定义用户认证系统&lt;/h3>
+&lt;p>如果需要支持更加灵活的用户系统，可自定义 authenticator 进行扩展，自定义 authenticator 实现接口&lt;code>org.apache.hugegraph.auth.HugeAuthenticator&lt;/code>即可，然后修改配置文件中&lt;code>authenticator&lt;/code>配置项指向该实现。&lt;/p></description></item><item><title>Docs: 配置 HugeGraphServer 使用 https 协议</title><link>/cn/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-https/</guid><description>
 &lt;h3 id="概述">概述&lt;/h3>
 &lt;p>HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。&lt;/p>
 &lt;h3 id="服务端配置">服务端配置&lt;/h3>
@@ -1533,13 +1593,13 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>keytool -genkey -alias serverkey -keyalg RSA -keystore server.keystore
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>过程中根据需求填写描述信息，默认证书的描述信息如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>名字和姓⽒：hugegraph
-组织单位名称：hugegraph
-组织名称：hugegraph
-城市或区域名称：BJ
-州或省份名称：BJ
-国家代码：CN
-&lt;/code>&lt;/pre>&lt;ol start="2">
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>名字和姓⽒：hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>组织单位名称：hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>组织名称：hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>城市或区域名称：BJ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>州或省份名称：BJ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>国家代码：CN
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>根据服务端私钥，导出服务端证书&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>keytool -export -alias serverkey -keystore server.keystore -file server.crt
